@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+  <head>  
+    <title>US county</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+
+  </head>
+
+<!--function is to replace spaces in <a href> to %20 otherwise 
+parameter will not pass correctly to web page -->
+<script type="text/javascript">
+    window.onload = function(){
+    var str = document.getElementById("myAnchor").href; 
+    var res = str.replace(" ", "%20");
+    document.getElementById("myAnchor").href = res;
+
+    }       
+</script>
+
+
+  <body>
+
+    <h1>City & County</h1>
+
+<div class="container">
+  <div class="mapdatatable">
+
+    <table border='1' id="maptable">
+
+     <thead>
+        <tr> 
+          <th width="15%"> city</th> 
+          <th width="10%"> county</th> 
+          <th width="5%"> state</th> 
+        </tr>
+      </thread>
+
+      <tbody>
+        <% mapcity.forEach(function(item){ %>
+          <tr>
+             <td> <a id="myAnchor" href='/mapzip?county=<%=item.county%>&city=<%=item.city%>' </a>
+                 <%= item.city%> </td>
+          	  <td> <%=item.county%> </td>
+          	  <td> <%=item.state%> </td>
+          </tr>
+        <% }) %>
+       </tbody>
+
+    </table>
+  </div>
+</div>
+
+  </body>
+
+</html>
+
+
+<script>
+            $(document).ready(function () {
+                var table = $("#maptable").dataTable({
+                    //columnDefs: [
+                    //    { targets: 0, searching: false, orderable: true }
+                    //],
+                    "scrollY": "750px",
+                    //fixedHeader: {
+                        //header: true,
+                        //footer: true
+                        //fixedColumns: {
+                        //    leftColumns: 4
+                    //},
+                    language: {
+                        paginate: {
+                            first: "&laquo;",
+                            last: "&raquo;",
+                            next: "&gt;",
+                            previous: "&lt;"
+                        }
+                    },
+                    pagingType: "full_numbers",
+                    //order: [[1,"asc"],[2,"asc"],[3,"asc"]],
+                    //scrollX: true,
+                    searching:  false,
+                    order: [[0, "asc"], [2, "asc"]],
+                    lengthMenu: [[25, 35, -1], [25, 35, "All"]]
+                });
+                //table.buttons().container()
+                //    .appendTo($('.col-sm-5:eq(0)', table.table().container()));
+            });
+
+</script>

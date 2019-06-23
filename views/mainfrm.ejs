@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Cities Zip Code</title>
+    <a href="http://paulv.azurewebsites.net">Home</a> (demo by Paul V.)
+    <h1>US Cities Zip Code</h1>    
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+  </head>
+
+  <body>
+    <form id="formMap" name="mapcity" method="post" action="/mapcity" >
+      US City Name
+      <input id="inputCity" type="text" placeholder="city" name="city" onkeypress="validatekey(event)" />
+      <button id="btnSubmit" type="submit" onmousedown="validatemouse()" onkeypress="handle(event)" >Submit</button>
+    </form>
+
+  </body>
+
+
+//Following functions validate key events
+<script>
+
+  function validatemouse() {
+    // check if input length > 1
+    var value = document.getElementById('inputCity').value;
+
+    if (value.length <2)
+    {
+      alert('Minimum 2 characters');
+      return false; // keep form from submitting
+    }
+   else
+      { return true;}
+   }
+
+
+  //Check for special characters and return key event
+  function handle(e){
+    // check if input length > 1
+    var value = document.getElementById('inputCity').value;
+
+    if (e.keyCode == 13 && value.length <2 ) {
+       e.preventDefault(); // Ensure it is only this code that rusn
+       alert('Minimum 2 characters');
+     }
+
+  }
+
+
+  function validatekey(e)
+    {
+      alert
+      if (e.keyCode > 32 && e.keyCode < 48 ) {
+         e.preventDefault(); // Ensure it is only this code that rusn
+         alert('Invalid character');
+       }
+    }
+
+
+</script>
+
+
+
+</html>

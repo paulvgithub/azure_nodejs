@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>    <title>Zip Codes</title>
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+  </head>
+
+  <body>
+    <h3>City Zip Codes</h3>
+
+<div class="container">
+  <div class="mapdatatable">
+
+    <table border='1' id="maptable">
+
+     <thead>
+        <tr> 
+          <th width="15%"> City</th> 
+          <th width="10%"> County</th> 
+          <th width="5%"> State </th> 
+          <th width="5%"> Zip Code</th> 
+
+          </tr>
+      </thread>
+      <tbody>
+        <% mapzip.forEach(function(item){ %>
+          <tr>
+             <td style='width:30%'> <a href='https://maps.google.com/maps/place/<%=item.map_lat%>+<%=item.map_long%>/@<%=item.map_lat%>,<%=item.map_long%>,10z/data=!4m5!3m4!1s0x0:0x0!8m2!3d<%=item.map_lat%>!4d<%=item.map_long%>, target= blank'><%=item.city %> </td>
+             <td style='width:25%'> <%= item.county%> </td>
+             <td style='width:25%'> <%= item.state%> </td>
+             <td style='width:20%'> <%=item.zip_code%> </td>
+          </tr>
+        <% }) %>
+       </tbody>
+
+    </table>
+  </div>
+</div>
+
+  </body>
+
+</html>
+
+
+<script>
+            $(document).ready(function () {
+                var table = $("#maptable").dataTable({
+                    //columnDefs: [
+                    //    { targets: 0, searching: false, orderable: true }
+                    //],
+                    "scrollY": "750px",
+                    //fixedHeader: {
+                        //header: true,
+                        //footer: true
+                        //fixedColumns: {
+                        //    leftColumns: 4
+                    //},
+                    language: {
+                        paginate: {
+                            first: "&laquo;",
+                            last: "&raquo;",
+                            next: "&gt;",
+                            previous: "&lt;"
+                        }
+                    },
+                    pagingType: "full_numbers",
+                    //order: [[1,"asc"],[2,"asc"],[3,"asc"]],
+                    //scrollX: true,
+                    searching:  false,
+                    //order: [[0, "asc"], [2, "asc"]],
+                    //lengthMenu: [[25, 35, -1], [25, 35, "All"]]
+                });
+                //table.buttons().container()
+                //    .appendTo($('.col-sm-5:eq(0)', table.table().container()));
+            });
+
+</script>
+
